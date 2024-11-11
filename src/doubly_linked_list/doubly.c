@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+typedef struct DNode DNode;
 struct DNode{
   int data;
   struct DNode *prev;
   struct DNode *next;
-};
+}DNode;
 
 struct DNode* createNode(int data){
   struct DNode* temp = (struct DNode*) malloc(sizeof(struct DNode));
@@ -63,20 +63,3 @@ void printDL(struct DNode *head){
   }
 }
 
-int main(int argc, char *argv[])
-{
-  struct DNode *head = createNode(10);
-  insertAtEnd(head, 23);
-  insertAtEnd(head, 3);
-  insertAtEnd(head, 13);
-  insertAtEnd(head, 223);
-  insertAtEnd(head, 1123);
-  printDL(head);
-  head =  insertAtBeg(head, 999);
-  printf("\n\n");
-  printDL(head);
-  insertAtMid(head, 223, 1000);
-  printf("\n\n");
-  printDL(head);
-  return 0;
-}
