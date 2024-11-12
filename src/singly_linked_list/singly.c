@@ -73,3 +73,11 @@ int deleteAfter(LNode *head, int delete_after){
     return 0;
   }
 }
+
+void printList(LNode *head){
+  LNode *temp = head;
+  while(temp -> next != NULL){
+    printf("%d ", temp -> data);
+    temp = temp -> next;
+  }
+}
