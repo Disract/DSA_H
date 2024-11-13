@@ -51,22 +51,56 @@ void AddNode(int data,bstn *head)
 bstn* SearchKey(bstn *head,int key)
 {
 	bstn *ptr_ = head;
+	bstn *parent_ = ptr_;
 	while(ptr_!=NULL && key != ptr_->data)
 	{
 		if(key<ptr_->data)
 		{
+			parent_ = ptr;
 			ptr_=ptr_->left;
 		}
 		else
-		{
+		{	parent_ = ptr;
 			ptr_=ptr_->right;
 		}
+	}
+	return parent_;
+}
+bstn* MinKey(bstn *head)
+{
+	bstn *ptr_ = head;
+	while(ptr_->left != NULL)
+	{
+		ptr_=ptr_->left;
+	}
+	return ptr_;
+}
+bstn* MaxKey(bstn *head)
+{
+	bstn *ptr_ = head;
+	while(ptr_->right != NULL)
+	{
+		ptr_=ptr_->right;
 	}
 	return ptr_;
 }
 bstn* DeleteNode(bstn *head,int key)
 {
-	
+	bstn *NodeToDeleteParent_ = SearchKey(head,key);
+	bstn *NodeToDelete = NULL;
+	if(key>NodeToDeleteParent_->data)
+	{
+		NodeToDelete = NodeToDeleteParent_->right;
+	}
+	else
+	{
+		NodeToDelete = NodeToDeleteParent_->left;
+	}
+	/*Actual Delteion*/
+	if(NodeToDelete -> right == NULL && NodeToDelete -> left != NULL)
+	{
+		
+	}
 }
 void PrintIn(bstn *head)
 {
