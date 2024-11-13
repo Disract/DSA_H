@@ -17,7 +17,7 @@ DNode* createNode(int data){
   return temp;
 }
 
-void insertAtEnd(DNode *head, int data){
+void insertEnd(DNode *head, int data){
   DNode *ptr = head;
   while(ptr -> next != NULL){
     ptr = ptr -> next;
@@ -28,7 +28,7 @@ void insertAtEnd(DNode *head, int data){
 }
 
 
-DNode* insertAtBeg(DNode *head, int data){
+DNode* insertStart(DNode *head, int data){
   DNode *temp = createNode(data);
   temp -> next = head;
   head = temp;
@@ -36,7 +36,7 @@ DNode* insertAtBeg(DNode *head, int data){
 }
 
 
-void insertAtMid(DNode *head, int insert_after, int data){
+void insertAfter(DNode *head, int insert_after, int data){
   DNode *ptr = head;
   while(ptr != NULL && ptr -> data != insert_after){
     ptr = ptr -> next;
