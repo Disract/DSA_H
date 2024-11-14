@@ -11,9 +11,10 @@ void AddNode(int data,bstn *head);
 void PrintIn(bstn *head);
 void PrintPost(bstn *head);
 void PrintPre(bstn *head);
-bstn* DeleteNode(bstn *head,int key);
+bstn* DeleteNode(int key,bstn *head);
 bstn* MinKey(bstn *head);
 bstn* MaxKey(bstn *head);
+bstn* GetSuccesorParent(bstn *head);
 bstn* SearchKey(bstn *head,int key);
 #endif
 
