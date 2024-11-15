@@ -11,7 +11,7 @@ bstn* CreateNode(int data)
 }
 bstn* CreateBst(int data)
 {
-	return CreateNode(data);
+  return CreateNode(data);
 }
 void AddNode(int data,bstn *head)
 {
@@ -24,8 +24,7 @@ void AddNode(int data,bstn *head)
         if(ptr_->left != NULL)
         {
           ptr_ = ptr_->left;
-        }
-        else
+               else
         {
           bstn *addnode_ = CreateNode(data);
           ptr_->left = addnode_;
@@ -56,11 +55,11 @@ bstn* SearchKey(bstn *head,int key)
 	{
 		if(key<ptr_->data)
 		{
-			parent_ = ptr_;
+			parent_ = ptr;
 			ptr_=ptr_->left;
 		}
 		else
-		{	parent_ = ptr_;
+		{	parent_ = ptr;
 			ptr_=ptr_->right;
 		}
 	}
@@ -73,7 +72,6 @@ bstn* MinKey(bstn *head)
 	{
 		ptr_=ptr_->left;
 	}
-	
 	return ptr_;
 }
 bstn* MaxKey(bstn *head)
@@ -85,95 +83,23 @@ bstn* MaxKey(bstn *head)
 	}
 	return ptr_;
 }
-bstn* GetSuccesorParent(bstn *ptr)
+bstn* DeleteNode(bstn *head,int key)
 {
-	bstn *ptr_ = ptr->right;
-	bstn *succesorparent_ = NULL;
-	while(ptr_->left != NULL)
-	{
-		succesorparent_ = ptr_;
-		ptr_ = ptr_->left;
-	}
-	return succesorparent_;
-}
-bstn* DeleteNode(int key,bstn *head)
-{
-	int root_flag = 0;
 	bstn *NodeToDeleteParent_ = SearchKey(head,key);
-	bstn *NodeToDelete_ = NULL;
+	bstn *NodeToDelete = NULL;
 	if(key>NodeToDeleteParent_->data)
 	{
-		NodeToDelete_ = NodeToDeleteParent_->right;
-	}
-	else if(key == NodeToDeleteParent_->data)
-	{
-		NodeToDelete_ = NodeToDeleteParent_;
-		root_flag = 1;
+		NodeToDelete = NodeToDeleteParent_->right;
 	}
 	else
 	{
-		NodeToDelete_ = NodeToDeleteParent_->left;
+		NodeToDelete = NodeToDeleteParent_->left;
 	}
-	if(NodeToDelete_ -> right == NULL && NodeToDelete_ -> left == NULL)
+	/*Actual Delteion*/
+	if(NodeToDelete -> right == NULL && NodeToDelete -> left != NULL)
 	{
-
-		if(NodeToDelete_->data<NodeToDeleteParent_->data)
-		{
-			NodeToDeleteParent_->left = NULL;
-			free(NodeToDelete_);
-		}
-		else
-		{
-			NodeToDeleteParent_->right = NULL;
-			free(NodeToDelete_);
-		}
-	}
-	else if(NodeToDelete_->right!=NULL && NodeToDelete_->left==NULL)
-	{
-		if(NodeToDelete_->data<NodeToDeleteParent_->data)
-		{
-			NodeToDeleteParent_->left = NodeToDelete_->right;
-			free(NodeToDelete_);
-		}
-		else
-		{
-			NodeToDeleteParent_->right = NodeToDelete_->right;
-			free(NodeToDelete_);
-		}	
-	}
-	else if(NodeToDelete_->left != NULL && NodeToDelete_->right == NULL)
-	{
-		if(NodeToDelete_->data<NodeToDeleteParent_->data)
-		{
-			NodeToDeleteParent_->left = NodeToDelete_->left;
-			free(NodeToDelete_);
-		}
-		else
-		{
-			NodeToDeleteParent_->right = NodeToDelete_->left;
-			free(NodeToDelete_);
-		}
-	}
-	else if(NodeToDelete_->left != NULL && NodeToDelete_->right != NULL)
-	{
-		bstn *succesorParent_ = NodeToDelete_;
-		bstn *successor_ = NodeToDelete_->right;
-		while (successor_->left != NULL) {
-			succesorParent_ = successor_;
-			successor_ = successor_->left;
-		}
-		NodeToDelete_->data = successor_->data;
-		if (succesorParent_->left == successor_) {
-			succesorParent_->left = successor_->right;
-		} else {
-			succesorParent_->right = successor_->right;
-		}
-		free(successor_);
-		
 		
 	}
-	return head;
-
 }
 void PrintIn(bstn *head)
 {
