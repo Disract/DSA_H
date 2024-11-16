@@ -78,7 +78,7 @@ bstn* MinKey(bstn *head)
 	bstn *ptr_ = head;
 	while(ptr_->left != NULL)
 	{
-		ptr_ ptr_->left;
+		ptr_ = ptr_->left;
 	}
 	
 	return ptr_;
