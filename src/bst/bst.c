@@ -1,7 +1,7 @@
 #include"bst.h"
 #include<stdlib.h>
 #include<stdio.h>
-bstn* CreateNode(int data)
+bstn* createNode(int data)
 {
   bstn *temp = (bstn *)malloc(sizeof(bstn));
   temp->data = data;
@@ -9,44 +9,25 @@ bstn* CreateNode(int data)
   temp->left = NULL;
   return temp;
 }
-bstn* CreateBst(int data)
+bstn* createBST(int data)
 {
-	return CreateNode(data);
+	return createNode(data);
 }
 void AddNode(int data,bstn *head)
 {
-    int addnodeflag_ = 0;
-    bstn *ptr_ = head;
-    while(addnodeflag_ != 1)
-    {
-      if(data<ptr_->data)
-      {
-        if(ptr_->left != NULL)
-        {
-          ptr_ = ptr_->left;
-        }
-        else
-        {
-          bstn *addnode_ = CreateNode(data);
-          ptr_->left = addnode_;
-          addnodeflag_ = 1;
-        }
-      }
-      else
-      {
-        if(ptr_->right != NULL)
-        {
-          ptr_ = ptr_->right;
-        }
-        else
-        {
-          bstn *addnode_ = CreateNode(data);
-          ptr_->right = addnode_;
-          addnodeflag_ = 1;
-        }
-      }
-
-    }
+  bstn *temp = head;
+  bstn *prev;
+  while(temp != NULL){
+    prev = temp;
+    if(temp -> data > data)
+      temp = temp -> left;
+    else 
+      temp = temp -> right;
+  }
+  if(prev -> data > data)
+    prev -> left = createNode(data);
+  else
+    prev -> right = createNode(data);
 }
 bstn* SearchKey(bstn *head,int key)
 {
