@@ -1,7 +1,7 @@
 #include"bst.h"
 #include<stdlib.h>
 #include<stdio.h>
-bstn* CreateNode(int data)
+bstn* createNode(int data)
 {
   bstn *temp = (bstn *)malloc(sizeof(bstn));
   temp->data = data;
@@ -9,44 +9,25 @@ bstn* CreateNode(int data)
   temp->left = NULL;
   return temp;
 }
-bstn* CreateBst(int data)
+bstn* createBST(int data)
 {
-	return CreateNode(data);
+	return createNode(data);
 }
 void AddNode(int data,bstn *head)
 {
-    int addnodeflag_ = 0;
-    bstn *ptr_ = head;
-    while(addnodeflag_ != 1)
-    {
-      if(data<ptr_->data)
-      {
-        if(ptr_->left != NULL)
-        {
-          ptr_ = ptr_->left;
-        }
-        else
-        {
-          bstn *addnode_ = CreateNode(data);
-          ptr_->left = addnode_;
-          addnodeflag_ = 1;
-        }
-      }
-      else
-      {
-        if(ptr_->right != NULL)
-        {
-          ptr_ = ptr_->right;
-        }
-        else
-        {
-          bstn *addnode_ = CreateNode(data);
-          ptr_->right = addnode_;
-          addnodeflag_ = 1;
-        }
-      }
-
-    }
+  bstn *temp = head;
+  bstn *prev;
+  while(temp != NULL){
+    prev = temp;
+    if(temp -> data > data)
+      temp = temp -> left;
+    else 
+      temp = temp -> right;
+  }
+  if(prev -> data > data)
+    prev -> left = createNode(data);
+  else
+    prev -> right = createNode(data);
 }
 bstn* SearchKey(bstn *head,int key)
 {
@@ -105,7 +86,6 @@ bstn* GetSuccesorParent(bstn *ptr)
 }
 bstn* DeleteNode(int key,bstn *head)
 {
-	int root_flag = 0;
 	bstn *NodeToDeleteParent_ = SearchKey(head,key);
 	if(NodeToDeleteParent_ == NULL)
 	{
@@ -120,7 +100,6 @@ bstn* DeleteNode(int key,bstn *head)
 	else if(key == NodeToDeleteParent_->data)
 	{
 		NodeToDelete_ = NodeToDeleteParent_;
-		root_flag = 1;
 	}
 	else
 	{
@@ -133,11 +112,19 @@ bstn* DeleteNode(int key,bstn *head)
 		{
 			NodeToDeleteParent_->left = NULL;
 			free(NodeToDelete_);
+			return head;
+		}
+		else if(NodeToDelete_->data == NodeToDeleteParent_->data)
+		{
+			free(NodeToDelete_);
+			printf("YOUR TREE IS GONE\n");
+			return NULL;
 		}
 		else
 		{
 			NodeToDeleteParent_->right = NULL;
 			free(NodeToDelete_);
+			return head;
 		}
 	}
 	else if(NodeToDelete_->right!=NULL && NodeToDelete_->left==NULL)
@@ -146,11 +133,19 @@ bstn* DeleteNode(int key,bstn *head)
 		{
 			NodeToDeleteParent_->left = NodeToDelete_->right;
 			free(NodeToDelete_);
+			return head;
+		}
+		else if(NodeToDelete_->data==NodeToDeleteParent_->data)
+		{
+			bstn *temp = NodeToDelete_->right;
+			free(NodeToDelete_);
+			return temp;
 		}
 		else
 		{
 			NodeToDeleteParent_->right = NodeToDelete_->right;
 			free(NodeToDelete_);
+			return head;
 		}	
 	}
 	else if(NodeToDelete_->left != NULL && NodeToDelete_->right == NULL)
@@ -159,11 +154,19 @@ bstn* DeleteNode(int key,bstn *head)
 		{
 			NodeToDeleteParent_->left = NodeToDelete_->left;
 			free(NodeToDelete_);
+			return head;
+		}
+		else if(NodeToDelete_->data==NodeToDeleteParent_->data)
+		{
+			bstn *temp = NodeToDelete_->left;
+			free(NodeToDelete_);
+			return temp;
 		}
 		else
 		{
 			NodeToDeleteParent_->right = NodeToDelete_->left;
 			free(NodeToDelete_);
+			return head;
 		}
 	}
 	else if(NodeToDelete_->left != NULL && NodeToDelete_->right != NULL)
@@ -187,6 +190,7 @@ bstn* DeleteNode(int key,bstn *head)
                         	succesorParent_->right = succesor_->right;
 			}
 			free(succesor_);
+			return head;
 		}
 		else
 		{
@@ -206,8 +210,9 @@ bstn* DeleteNode(int key,bstn *head)
        				succesorParent_->right = successor_->right;
 			}
                 	free(successor_);
+			return head;
 		}
-		return head;
+		
 	}
 }
 void PrintIn(bstn *head)

@@ -6,7 +6,7 @@ typedef struct bstn {
     int data;
 } bstn;
 bstn* CreateNode(int data);
-bstn* CreateBst(int data);
+bstn* createBST(int data);
 void AddNode(int data,bstn *head);
 void PrintIn(bstn *head);
 void PrintPost(bstn *head);
