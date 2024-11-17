@@ -33,9 +33,8 @@ LNode* insertStart(LNode *head, int data){
 
 int insertAfter(LNode *head, int insert_after, int data){
   LNode *temp = head;
-  while (temp -> data != insert_after && temp != NULL) {
+  while (temp -> data != insert_after && temp != NULL) 
     temp = temp -> next;
-  }
   if(temp == NULL){
     return  -1;
   }
