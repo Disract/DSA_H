@@ -45,14 +45,21 @@ bstn* SearchKey(bstn *head,int key)
 			ptr_=ptr_->right;
 		}
 	}
-	return parent_;
+	if(ptr_ != NULL)
+	{
+		return parent_;
+	}
+	else
+	{
+		return ptr_;
+	}
 }
 bstn* MinKey(bstn *head)
 {
 	bstn *ptr_ = head;
 	while(ptr_->left != NULL)
 	{
-		ptr_=ptr_->left;
+		ptr_ = ptr_->left;
 	}
 	
 	return ptr_;
@@ -79,8 +86,12 @@ bstn* GetSuccesorParent(bstn *ptr)
 }
 bstn* DeleteNode(int key,bstn *head)
 {
-	int root_flag = 0;
 	bstn *NodeToDeleteParent_ = SearchKey(head,key);
+	if(NodeToDeleteParent_ == NULL)
+	{
+		printf("No Node Exist with the given key %d\n",key);
+		return head;	
+	}
 	bstn *NodeToDelete_ = NULL;
 	if(key>NodeToDeleteParent_->data)
 	{
@@ -89,7 +100,6 @@ bstn* DeleteNode(int key,bstn *head)
 	else if(key == NodeToDeleteParent_->data)
 	{
 		NodeToDelete_ = NodeToDeleteParent_;
-		root_flag = 1;
 	}
 	else
 	{
@@ -102,11 +112,19 @@ bstn* DeleteNode(int key,bstn *head)
 		{
 			NodeToDeleteParent_->left = NULL;
 			free(NodeToDelete_);
+			return head;
+		}
+		else if(NodeToDelete_->data == NodeToDeleteParent_->data)
+		{
+			free(NodeToDelete_);
+			printf("YOUR TREE IS GONE\n");
+			return NULL;
 		}
 		else
 		{
 			NodeToDeleteParent_->right = NULL;
 			free(NodeToDelete_);
+			return head;
 		}
 	}
 	else if(NodeToDelete_->right!=NULL && NodeToDelete_->left==NULL)
@@ -115,11 +133,19 @@ bstn* DeleteNode(int key,bstn *head)
 		{
 			NodeToDeleteParent_->left = NodeToDelete_->right;
 			free(NodeToDelete_);
+			return head;
+		}
+		else if(NodeToDelete_->data==NodeToDeleteParent_->data)
+		{
+			bstn *temp = NodeToDelete_->right;
+			free(NodeToDelete_);
+			return temp;
 		}
 		else
 		{
 			NodeToDeleteParent_->right = NodeToDelete_->right;
 			free(NodeToDelete_);
+			return head;
 		}	
 	}
 	else if(NodeToDelete_->left != NULL && NodeToDelete_->right == NULL)
@@ -128,33 +154,66 @@ bstn* DeleteNode(int key,bstn *head)
 		{
 			NodeToDeleteParent_->left = NodeToDelete_->left;
 			free(NodeToDelete_);
+			return head;
+		}
+		else if(NodeToDelete_->data==NodeToDeleteParent_->data)
+		{
+			bstn *temp = NodeToDelete_->left;
+			free(NodeToDelete_);
+			return temp;
 		}
 		else
 		{
 			NodeToDeleteParent_->right = NodeToDelete_->left;
 			free(NodeToDelete_);
+			return head;
 		}
 	}
 	else if(NodeToDelete_->left != NULL && NodeToDelete_->right != NULL)
 	{
 		bstn *succesorParent_ = NodeToDelete_;
-		bstn *successor_ = NodeToDelete_->right;
-		while (successor_->left != NULL) {
-			succesorParent_ = successor_;
-			successor_ = successor_->left;
+		if(NodeToDelete_->right == NULL)
+		{
+			bstn *succesor_ = NodeToDelete_->left;
+			while(succesor_->right != NULL)
+			{
+				succesorParent_ = succesor_;
+				succesor_ = succesor_->right;
+			}
+			NodeToDelete_->data = succesor_->data;
+			if (succesorParent_->left == succesor_) 
+			{
+				succesorParent_->left = succesor_->right;
+			}	 
+			else 
+			{
+                        	succesorParent_->right = succesor_->right;
+			}
+			free(succesor_);
+			return head;
 		}
-		NodeToDelete_->data = successor_->data;
-		if (succesorParent_->left == successor_) {
-			succesorParent_->left = successor_->right;
-		} else {
-			succesorParent_->right = successor_->right;
+		else
+		{
+			bstn *successor_ = NodeToDelete_->right;
+			while (successor_->left != NULL) 
+			{
+				succesorParent_ = successor_;
+				successor_ = successor_->left;
+			}
+			NodeToDelete_->data = successor_->data;
+			if (succesorParent_->left == successor_) 
+			{
+				succesorParent_->left = successor_->right;
+			} 
+			else 
+			{
+       				succesorParent_->right = successor_->right;
+			}
+                	free(successor_);
+			return head;
 		}
-		free(successor_);
-		
 		
 	}
-	return head;
-
 }
 void PrintIn(bstn *head)
 {
