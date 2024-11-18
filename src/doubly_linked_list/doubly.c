@@ -54,14 +54,96 @@ void insertAfter(DNode *head, int insert_after, int data){
     ptr2 -> prev = temp;
   }
 }
+DNode *deleteStart(DNode *head)
+{
+	if(head->next == NULL)
+	{
+		free(head);
+		return NULL;
+	}
+	DNode *temp = head;
+	head = head->next;
+	temp->next->prev = NULL;
+	free(temp);
+	return head;
+}
+DNode *deleteEnd(DNode *head)
+{
+	if(head->next == NULL)
+	{
+		free(head);
+		return NULL;
+	}
+	DNode *ptr = head;
+	DNode *trail_ptr = NULL;
+	while(ptr->next != NULL)
+	{
+		trail_ptr = ptr;
+		ptr = ptr->next;
+		if(ptr->next == NULL)
+		{
+			trail_ptr->next = NULL;
+			free(ptr);
+			return head;
+		}
+	}
+	
 
 
-
+}
+DNode *deleteKey(DNode *head,int key)
+{
+	DNode *ptr = head;
+	if(ptr->next == NULL)
+	{
+		free(head);
+		return NULL;
+	}
+	else if(ptr->data == key)
+	{
+		return deleteStart(head);
+	}
+	while(ptr->next != NULL && ptr->data != key)
+	{
+		ptr = ptr->next;
+	}
+	if(ptr->next == NULL && ptr->data != key)
+	{
+		printf("NO SUCH KEY IN LIST\n");
+		return head;
+	}
+	else if(ptr->next == NULL && ptr->data == key)
+	{
+		return deleteEnd(head);
+	}
+	else
+	{
+		ptr->prev->next = ptr->next;
+		ptr->next->prev = ptr->prev;
+		free(ptr);
+		return head;
+	}
+	
+}
 void printDL(DNode *head){
   DNode *ptr = head;
-  while(ptr != NULL){
-    printf("value: %d next address: 0x%x \n" , ptr -> data, ptr -> next);
+  if(ptr == NULL)
+  {
+  	printf("NULL VALUE");
+	return;
+  }
+  if(ptr->next == NULL)
+  {
+  	printf("%d",ptr->data);
+	return;
+  }
+  while(ptr->next != NULL){
+    printf("%d<->" , ptr -> data);
     ptr = ptr -> next;
+    if(ptr->next == NULL)
+    {
+    	printf("%d",ptr->data);
+    }
   }
 }
 

@@ -13,7 +13,7 @@ bstn* createBST(int data)
 {
 	return createNode(data);
 }
-void AddNode(int data,bstn *head)
+void addNode(int data,bstn *head)
 {
   bstn *temp = head;
   bstn *prev;
@@ -29,7 +29,7 @@ void AddNode(int data,bstn *head)
   else
     prev -> right = createNode(data);
 }
-bstn* SearchKey(bstn *head,int key)
+bstn* searchKey(bstn *head,int key)
 {
 	bstn *ptr_ = head;
 	bstn *parent_ = ptr_;
@@ -54,7 +54,7 @@ bstn* SearchKey(bstn *head,int key)
 		return ptr_;
 	}
 }
-bstn* MinKey(bstn *head)
+bstn* minKey(bstn *head)
 {
 	bstn *ptr_ = head;
 	while(ptr_->left != NULL)
@@ -64,7 +64,7 @@ bstn* MinKey(bstn *head)
 	
 	return ptr_;
 }
-bstn* MaxKey(bstn *head)
+bstn* maxKey(bstn *head)
 {
 	bstn *ptr_ = head;
 	while(ptr_->right != NULL)
@@ -73,7 +73,7 @@ bstn* MaxKey(bstn *head)
 	}
 	return ptr_;
 }
-bstn* GetSuccesorParent(bstn *ptr)
+bstn* getSuccesorParent(bstn *ptr)
 {
 	bstn *ptr_ = ptr->right;
 	bstn *succesorparent_ = NULL;
@@ -84,7 +84,7 @@ bstn* GetSuccesorParent(bstn *ptr)
 	}
 	return succesorparent_;
 }
-bstn* DeleteNode(int key,bstn *head)
+bstn* deleteNode(int key,bstn *head)
 {
 	bstn *NodeToDeleteParent_ = SearchKey(head,key);
 	if(NodeToDeleteParent_ == NULL)
@@ -215,29 +215,29 @@ bstn* DeleteNode(int key,bstn *head)
 		
 	}
 }
-void PrintIn(bstn *head)
+void printIn(bstn *head)
 {
     bstn *tptr_ = head;
     if(tptr_ == NULL)
     {
       return;
     }
-    PrintIn(tptr_->left);
+    printIn(tptr_->left);
     printf("%d ",tptr_->data);
-    PrintIn(tptr_->right);
+    printIn(tptr_->right);
 }
-void PrintPost(bstn *head)
+void printPost(bstn *head)
 {
     bstn *tptr_ = head;
     if(tptr_ == NULL)
     {
       return;
     }
-    PrintPost(tptr_->left);
-    PrintPost(tptr_->right);
+    printPost(tptr_->left);
+    printPost(tptr_->right);
     printf("%d ",tptr_->data);
  }
-void PrintPre(bstn *head)
+void printPre(bstn *head)
 {
     bstn *tptr_ = head;
     if(tptr_ == NULL)
@@ -245,7 +245,7 @@ void PrintPre(bstn *head)
       return;
     }
     printf("%d ",tptr_->data);
-    PrintPre(tptr_->left);
-    PrintPre(tptr_->right);
+    printPre(tptr_->left);
+    printPre(tptr_->right);
 
 }
