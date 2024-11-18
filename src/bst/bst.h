@@ -5,16 +5,16 @@ typedef struct bstn {
     struct bstn *left;
     int data;
 } bstn;
-bstn* CreateNode(int data);
+bstn* createNode(int data);
 bstn* createBST(int data);
-void AddNode(int data,bstn *head);
-void PrintIn(bstn *head);
-void PrintPost(bstn *head);
-void PrintPre(bstn *head);
-bstn* DeleteNode(int key,bstn *head);
-bstn* MinKey(bstn *head);
-bstn* MaxKey(bstn *head);
-bstn* GetSuccesorParent(bstn *head);
-bstn* SearchKey(bstn *head,int key);
+void addNode(int data,bstn *head);
+void printIn(bstn *head);
+void pintPost(bstn *head);
+void printPre(bstn *head);
+bstn* deleteNode(int key,bstn *head);
+bstn* minKey(bstn *head);
+bstn* maxKey(bstn *head);
+bstn* getSuccesorParent(bstn *head);
+bstn* searchKey(bstn *head,int key);
 #endif
 
