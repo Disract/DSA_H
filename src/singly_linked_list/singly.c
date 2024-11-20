@@ -6,14 +6,14 @@ struct LNode {
   LNode *next;
 };
 
-LNode* createNode(int data){
+LNode* LcreateNode(int data){
   LNode *temp = (LNode*)malloc(sizeof(LNode));
   temp -> data = data;
   temp -> next = NULL;
   return temp;
 }
 
-void insertEnd(LNode *head, int data){
+void LinsertEnd(LNode *head, int data){
   LNode *temp = head;
   while(temp -> next != NULL){
     temp = temp -> next;
@@ -21,14 +21,14 @@ void insertEnd(LNode *head, int data){
   temp -> next = createNode(data);
 }
 
-LNode* insertStart(LNode *head, int data){
+LNode* LinsertStart(LNode *head, int data){
   LNode *temp = createNode(data);
   temp -> next = head;
   head = temp;
   return temp;
 }
 
-int insertAfter(LNode *head, int insert_after, int data){
+int LinsertAfter(LNode *head, int insert_after, int data){
   LNode *temp = head;
   while (temp -> data != insert_after && temp != NULL) 
     temp = temp -> next;
@@ -44,7 +44,7 @@ int insertAfter(LNode *head, int insert_after, int data){
 }
 
 
-LNode* deleteEnd(LNode *head){
+LNode* LdeleteEnd(LNode *head){
 	if(head->next == NULL)
 	{
 		free(head);
@@ -63,7 +63,7 @@ LNode* deleteEnd(LNode *head){
 
 }
 
-LNode* deleteStart(LNode *head){
+LNode* LdeleteStart(LNode *head){
 	if(head == NULL)
 	{
 		return NULL;
@@ -74,7 +74,7 @@ LNode* deleteStart(LNode *head){
 	return head;
 }
 
-int deleteAfter(LNode *head, int delete_after){
+int LdeleteAfter(LNode *head, int delete_after){
   LNode *temp = head;
   LNode *prev_temp;
   while(temp -> data != delete_after && temp != NULL){
@@ -93,7 +93,7 @@ int deleteAfter(LNode *head, int delete_after){
   }
 }
 
-LNode* deleteKey(LNode *head,int key)
+LNode* LdeleteKey(LNode *head,int key)
 {
 	LNode *ptr = head;
 	LNode *trail_ptr;
@@ -121,7 +121,7 @@ LNode* deleteKey(LNode *head,int key)
 	return head;
 }
 
-void printList(LNode *head){
+void printLinkedList(LNode *head){
   LNode *temp = head;
   if(temp == NULL)
   {
