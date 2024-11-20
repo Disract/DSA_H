@@ -14,7 +14,8 @@ else
                 if [[ stat -eq 0 ]]
                 then
                         sudo cp lib$2.so -d /usr/lib
-                        sudo cp $1.h -d /usr/include
+                        sudo cp $1.h -d /usr/include/
+                        sudo ldconfig
                         echo "Successfully compiled and created an shared object. Library ready to use!"
                 else
                         echo "ERROR: compilation and executable file creation successful but creating the shared library has run into some issue"
