@@ -21,7 +21,8 @@ void push(Stack *stack, int to_insert){
     stack -> stack[stack -> top++] = to_insert;
   }
   else{
-    return ;
+    printf("STACK OVERFLOW");
+    return;
   }
 }
 
@@ -31,6 +32,11 @@ int getTop(Stack *stack){
 
 int pop(Stack *stack){
   int top = getTop(stack);
+  if(stack->top == -1)
+  {
+    printf("STACK UNDERFLOW");
+    return stack->top;
+  }
   stack -> top--;
   return top;
 }
