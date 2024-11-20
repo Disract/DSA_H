@@ -19,6 +19,7 @@ else
                         echo "Successfully compiled and created an shared object. Library ready to use!"
                 else
                         echo "ERROR: compilation and executable file creation successful but creating the shared library has run into some issue"
+                        echo "switch to linux for a better life"
                         gcc -shared -o lib$2.so $1.o
                 fi
         else
