@@ -2,18 +2,18 @@
 #include <stdlib.h>
 typedef struct LNode LNode;
 struct LNode {
-  int data;
+  void *data;
   LNode *next;
 };
 
-LNode* LcreateNode(int data){
+LNode* LcreateNode(void *data){
   LNode *temp = (LNode*)malloc(sizeof(LNode));
   temp -> data = data;
   temp -> next = NULL;
   return temp;
 }
 
-void LinsertEnd(LNode *head, int data){
+void LinsertEnd(LNode *head, void *data){
   LNode *temp = head;
   while(temp -> next != NULL){
     temp = temp -> next;
@@ -21,14 +21,14 @@ void LinsertEnd(LNode *head, int data){
   temp -> next = createNode(data);
 }
 
-LNode* LinsertStart(LNode *head, int data){
+LNode* LinsertStart(LNode *head, void *data){
   LNode *temp = createNode(data);
   temp -> next = head;
   head = temp;
   return temp;
 }
 
-int LinsertAfter(LNode *head, int insert_after, int data){
+int LinsertAfter(LNode *head, int insert_after, void *data){
   LNode *temp = head;
   while (temp -> data != insert_after && temp != NULL) 
     temp = temp -> next;
